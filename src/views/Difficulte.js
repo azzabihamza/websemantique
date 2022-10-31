@@ -3,21 +3,21 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 
-const Plat = () => {
+const Difficulte = () => {
 
-  const [Plat, setPlat] = useState(null);
+  const [Diff, setDiff] = useState(null);
 
 
   async function fetchData() {
     console.log("aaaaaaa");
 
     axios
-      .get(`http://localhost:8095/plat`, {
+      .get(`http://localhost:8095/difficulte`, {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then((res) => {
         console.log(res.data.results.bindings);
-        setPlat(res.data.results.bindings);
+        setDiff(res.data.results.bindings);
       });
   }
 
@@ -32,21 +32,19 @@ const Plat = () => {
         <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Liste de Plats</h4>
+            <h4 class="card-title">Les types de difficultés</h4>
             <div class="table-responsive">
               <table class="table">
                 <thead>
                   <tr>
-                    <th>Description</th>
-                    <th>Nom</th>
+                    <th>Type</th>
                  
                   </tr>
                 </thead>
                 <tbody>
-                {Plat?.map((item) => (
+                {Diff?.map((item) => (
                   <tr>
-                    <td>{item.description.value}</td>
-                    <td>{item.nom.value}</td>
+                    <td>{item.type.value}</td>
 
 
                   </tr>
@@ -62,4 +60,4 @@ const Plat = () => {
   )
 }
 
-export default Plat
+export default Difficulte

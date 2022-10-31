@@ -1,72 +1,100 @@
 import React from "react";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
 const Aliment = () => {
+  const [Aliment, setAliment] = useState(null);
+  const [Animal, setAnimal] = useState(null);
+  const [Liquide, setLiquide] = useState(null);
+
+
+  async function fetchData() {
+    console.log("aaaaaaa");
+
+    axios
+      .get(`http://localhost:8095/aliment`, {
+        headers: { "Access-Control-Allow-Origin": "*" },
+      })
+      .then((res) => {
+        console.log(res.data.results.bindings);
+        setAliment(res.data.results.bindings);
+      });
+
+      
+    axios
+    .get(`http://localhost:8095/animal`, {
+      headers: { "Access-Control-Allow-Origin": "*" },
+    })
+    .then((res) => {
+      console.log(res.data.results.bindings);
+      setAnimal(res.data.results.bindings);
+    });
+
+
+    axios
+    .get(`http://localhost:8095/liquide`, {
+      headers: { "Access-Control-Allow-Origin": "*" },
+    })
+    .then((res) => {
+      console.log(res.data.results.bindings);
+      setLiquide(res.data.results.bindings);
+    });
+    
+      
+  }
+
+  useEffect(() => {
+    fetchData();
+    
+  }, []);
+  
+
+  
+
+
+  
+
   return (
     <div>
-      <div class="col-lg-8 grid-margin stretch-card">
+        <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Basic Table</h4>
-            <p class="card-description">Basic table with card</p>
+            <h4 class="card-title">Les Aliments</h4>
             <div class="table-responsive">
               <table class="table">
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>ID No.</th>
-                    <th>Created On</th>
-                    <th>Status</th>
+                    <th>Nom</th>
+                    <th>Calorie</th>
+                 
                   </tr>
                 </thead>
                 <tbody>
+                {Aliment?.map((item) => (
                   <tr>
-                    <td>Samso Park</td>
-                    <td>34424433</td>
-                    <td>12 May 2017</td>
-                    <td>
-                      <label class="badge badge-danger">Pending</label>
-                    </td>
+                    <td>{item.nom.value}</td>
+                    <td>{item.calorie.value}</td>
+                    
+                    
+
+
+                    
+
                   </tr>
-                  <tr>
-                    <td>Marlo Sanki</td>
-                    <td>53425532</td>
-                    <td>15 May 2015</td>
-                    <td>
-                      <label class="badge badge-warning">In progress</label>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>John ryte</td>
-                    <td>53275533</td>
-                    <td>14 May 2017</td>
-                    <td>
-                      <label class="badge badge-info">Fixed</label>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Peter mark</td>
-                    <td>53275534</td>
-                    <td>16 May 2017</td>
-                    <td>
-                      <label class="badge badge-success">Completed</label>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Dave</td>
-                    <td>53275535</td>
-                    <td>20 May 2017</td>
-                    <td>
-                      <label class="badge badge-warning">In progress</label>
-                    </td>
-                  </tr>
+
+                  
+               
+               ))}
                 </tbody>
-              </table>
+
+</table>
+
+             
             </div>
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
 export default Aliment;

@@ -6,6 +6,8 @@ import { Route } from "react-router-dom";
 import Aliment from "./views/Aliment";
 import Recette from "./views/Recette";
 import Plat from "./views/Plat";
+import Ingredient from "./views/Ingredient"
+import Difficulte from "./views/Difficulte"
 import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
@@ -16,6 +18,10 @@ function App() {
         <Route path="/recette" element={<Recette />} />
         <Route path="/aliment" element={<Aliment />} />
         <Route path="/plat" element={<Plat />} />
+        <Route path="/ingredient" element={<Ingredient />} />
+        <Route path="/difficulte" element={<Difficulte />} />
+
+
       </Routes>
     </div>
   );

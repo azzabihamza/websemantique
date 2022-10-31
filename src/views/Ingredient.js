@@ -3,21 +3,21 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 
-const Plat = () => {
+const Ingredient = () => {
 
-  const [Plat, setPlat] = useState(null);
+  const [Ingredient, setIngredient] = useState(null);
 
 
   async function fetchData() {
     console.log("aaaaaaa");
 
     axios
-      .get(`http://localhost:8095/plat`, {
+      .get(`http://localhost:8095/ingredient`, {
         headers: { "Access-Control-Allow-Origin": "*" },
       })
       .then((res) => {
         console.log(res.data.results.bindings);
-        setPlat(res.data.results.bindings);
+        setIngredient(res.data.results.bindings);
       });
   }
 
@@ -32,21 +32,21 @@ const Plat = () => {
         <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Liste de Plats</h4>
+            <h4 class="card-title">Liste de Ingredients</h4>
             <div class="table-responsive">
               <table class="table">
                 <thead>
                   <tr>
-                    <th>Description</th>
                     <th>Nom</th>
+                    <th>Quantité</th>
                  
                   </tr>
                 </thead>
                 <tbody>
-                {Plat?.map((item) => (
+                {Ingredient?.map((item) => (
                   <tr>
-                    <td>{item.description.value}</td>
                     <td>{item.nom.value}</td>
+                    <td>{item.quantite.value}</td>
 
 
                   </tr>
@@ -59,7 +59,7 @@ const Plat = () => {
         </div>
       </div>
     </div>
-  )
+  ) 
 }
 
-export default Plat
+export default Ingredient
